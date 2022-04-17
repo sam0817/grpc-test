@@ -36,13 +36,14 @@ public class WeatherForecastController : ControllerBase
     [Route("GrpcCall")]
     public async Task<string> CallGrpc()
     {
-        using var channel = GrpcChannel.ForAddress("https://localhost:7007");
+        using var channel = GrpcChannel.ForAddress("https://localhost:8028");
+        // using var channel = GrpcChannel.ForAddress("https://tet-fxap-a01.masterlink.com.tw:8028");
         var client = new Greeter.GreeterClient(channel);
         var reply = await client.SayHelloAsync(
             new HelloRequest { Name = "GreeterClient" });
         Console.WriteLine("Greeting: " + reply.Message);
         Console.WriteLine("Press any key to exit...");
-        Console.ReadKey();
+        // Console.ReadKey();
         return reply.Message;
     }
 }
